@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Light mode: section palettes ─────────────────────────────────────── */
+
+body {
+  --bg:      #F4F5F3;
+  --surface: #E6E9E5;
+  --muted:   #8E9689;
+  --accent:  #4A5D52;
+  --text:    #1E2B25;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+body[data-section="projects"] {
+  --bg:      #F0F4F8;
+  --surface: #DDE8F0;
+  --muted:   #7A9BB8;
+  --accent:  #2A5B8A;
+  --text:    #142A40;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+body[data-section="essays"] {
+  --bg:      #F0F6F4;
+  --surface: #DCF0E8;
+  --muted:   #6EAA96;
+  --accent:  #1E6B5A;
+  --text:    #0E2E26;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+body[data-section="notes"] {
+  --bg:      #F5F2ED;
+  --surface: #E8E0D4;
+  --muted:   #A8937A;
+  --accent:  #6B4D2E;
+  --text:    #2C1E10;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+/* ─── Dark mode: system preference ─────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --bg:      #141C18;
+    --surface: #1E2B25;
+    --muted:   #5E6B5F;
+    --accent:  #7FB09A;
+    --text:    #D4DDD2;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+
+  body[data-section="projects"] {
+    --bg:      #0E1E2E;
+    --surface: #18304A;
+    --muted:   #4A6A80;
+    --accent:  #5A9FD4;
+    --text:    #D0DDE8;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+
+  body[data-section="essays"] {
+    --bg:      #0A1E1A;
+    --surface: #143830;
+    --muted:   #3A7A68;
+    --accent:  #4CC4A0;
+    --text:    #C8E8DA;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+
+  body[data-section="notes"] {
+    --bg:      #18120A;
+    --surface: #2C1E10;
+    --muted:   #6B5840;
+    --accent:  #C8A060;
+    --text:    #DDD0C0;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+}
+
+/* ─── Manual override: force dark (even when system is light) ───────────── */
+
+html[data-theme="dark"] body {
+  --bg:      #141C18;
+  --surface: #1E2B25;
+  --muted:   #5E6B5F;
+  --accent:  #7FB09A;
+  --text:    #D4DDD2;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+html[data-theme="dark"] body[data-section="projects"] {
+  --bg:      #0E1E2E;
+  --surface: #18304A;
+  --muted:   #4A6A80;
+  --accent:  #5A9FD4;
+  --text:    #D0DDE8;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+html[data-theme="dark"] body[data-section="essays"] {
+  --bg:      #0A1E1A;
+  --surface: #143830;
+  --muted:   #3A7A68;
+  --accent:  #4CC4A0;
+  --text:    #C8E8DA;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+html[data-theme="dark"] body[data-section="notes"] {
+  --bg:      #18120A;
+  --surface: #2C1E10;
+  --muted:   #6B5840;
+  --accent:  #C8A060;
+  --text:    #DDD0C0;
+  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+}
+
+/* ─── Manual override: force light (even when system is dark) ───────────── */
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="light"] body {
+    --bg:      #F4F5F3;
+    --surface: #E6E9E5;
+    --muted:   #8E9689;
+    --accent:  #4A5D52;
+    --text:    #1E2B25;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+
+  html[data-theme="light"] body[data-section="projects"] {
+    --bg:      #F0F4F8;
+    --surface: #DDE8F0;
+    --muted:   #7A9BB8;
+    --accent:  #2A5B8A;
+    --text:    #142A40;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+
+  html[data-theme="light"] body[data-section="essays"] {
+    --bg:      #F0F6F4;
+    --surface: #DCF0E8;
+    --muted:   #6EAA96;
+    --accent:  #1E6B5A;
+    --text:    #0E2E26;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+
+  html[data-theme="light"] body[data-section="notes"] {
+    --bg:      #F5F2ED;
+    --surface: #E8E0D4;
+    --muted:   #A8937A;
+    --accent:  #6B4D2E;
+    --text:    #2C1E10;
+    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  }
+}
+
+/* ─── Base styles ───────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.15s, color 0.15s;
+    min-height: 100vh;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--bg);
+  }
+}
+
+/* ─── Prose ─────────────────────────────────────────────────────────────── */
+
+@layer components {
+  .prose-custom {
+    max-width: 68ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose-custom h1,
+  .prose-custom h2,
+  .prose-custom h3,
+  .prose-custom h4 {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+    color: var(--text);
+  }
+
+  .prose-custom h1 { font-size: 1.75rem; }
+  .prose-custom h2 { font-size: 1.375rem; }
+  .prose-custom h3 { font-size: 1.125rem; }
+
+  .prose-custom p { margin-bottom: 1.4em; }
+
+  .prose-custom ul,
+  .prose-custom ol {
+    margin-left: 1.5em;
+    margin-bottom: 1.4em;
+  }
+
+  .prose-custom li { margin-bottom: 0.4em; }
+
+  .prose-custom blockquote {
+    border-left: 3px solid var(--border);
+    padding-left: 1.25em;
+    color: var(--muted);
+    font-style: italic;
+    margin: 1.75em 0;
+  }
+
+  .prose-custom code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.875em;
+    background: var(--surface);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    color: var(--text);
+  }
+
+  .prose-custom pre {
+    background: var(--surface);
+    padding: 1.25em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 1.75em 0;
+    border: 1px solid var(--border);
+  }
+
+  .prose-custom pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .prose-custom img {
+    width: 100%;
+    border-radius: 4px;
+    margin: 1.75em 0;
+  }
+
+  .prose-custom figure {
+    margin: 1.75em 0;
+  }
+
+  .prose-custom figure img {
+    margin: 0;
+  }
+
+  .prose-custom figcaption {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-top: 0.5em;
+    text-align: center;
+  }
+
+  .prose-custom hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5em 0;
+  }
+
+  .prose-custom a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-custom .footnotes {
+    margin-top: 3em;
+    padding-top: 1.5em;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  .prose-custom .footnotes ol {
+    list-style-type: decimal;
+    margin-left: 1.25em;
+  }
+
+  .prose-custom .footnotes li {
+    margin-bottom: 0.5em;
+    padding-left: 0.25em;
+  }
+
+  .prose-custom .footnotes li p {
+    margin-bottom: 0;
+    display: inline;
+  }
+
+  .prose-custom .footnotes a[data-footnote-backref] {
+    margin-left: 0.35em;
+    text-decoration: none;
+    color: var(--muted);
+  }
+}

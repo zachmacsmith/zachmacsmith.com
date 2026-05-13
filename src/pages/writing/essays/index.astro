@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import EssayListItem from '../../../components/EssayListItem.astro';
+import { getCollection } from 'astro:content';
+
+const essays = await getCollection('essays');
+essays.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function estimateReadTime(body: string): number {
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+---
+
+<Base title="Essays — Zach Macaskill-Smith" section="essays">
+  <div class="mx-auto px-6 py-12" style="max-width: 740px;">
+    <header class="mb-8">
+      <h1 class="font-sans font-semibold mb-1" style="font-size: 2rem; color: var(--text);">
+        Essays
+      </h1>
+      <p class="font-sans text-sm" style="color: var(--muted);">
+        Finished work — technical, philosophical, and at the edges of both.
+      </p>
+    </header>
+    <ul class="flex flex-col" style="max-width: 68ch;">
+      {essays.map((essay) => (
+        <EssayListItem
+          title={essay.data.title}
+          slug={essay.slug}
+          date={essay.data.date}
+          description={essay.data.description ?? ''}
+          tags={essay.data.tags ?? []}
+          readTime={estimateReadTime(essay.body)}
+        />
+      ))}
+    </ul>
+  </div>
+</Base>

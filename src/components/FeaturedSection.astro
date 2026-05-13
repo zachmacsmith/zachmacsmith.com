@@ -1,0 +1,39 @@
+---
+interface FeaturedItem {
+  title: string;
+  href: string;
+  type: 'Essay' | 'Note' | 'Project';
+  description: string;
+}
+
+interface Props {
+  items: FeaturedItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="mb-14">
+  <h2 class="font-sans text-xs uppercase tracking-widest mb-6" style="color: var(--muted); letter-spacing: 0.12em;">
+    Selected
+  </h2>
+  <ul class="flex flex-col">
+    {items.map((item) => (
+      <li class="py-4" style="border-bottom: 1px solid var(--border);">
+        <a href={item.href} style="text-decoration: none;">
+          <div class="flex items-baseline gap-3 mb-1">
+            <span class="font-sans text-xs italic shrink-0" style="color: var(--muted);">
+              {item.type.toLowerCase()}
+            </span>
+            <span class="font-sans font-medium text-sm hover:underline" style="color: var(--text);">
+              {item.title}
+            </span>
+          </div>
+          <p class="font-sans text-sm pl-12" style="color: var(--muted); line-height: 1.5;">
+            {item.description}
+          </p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

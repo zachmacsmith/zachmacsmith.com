@@ -1,0 +1,31 @@
+---
+import Base from '../../../layouts/Base.astro';
+import NoteListItem from '../../../components/NoteListItem.astro';
+import { getCollection } from 'astro:content';
+
+const notes = await getCollection('notes');
+notes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base title="Notes — Zach Macaskill-Smith" section="notes">
+  <div class="mx-auto px-6 py-12" style="max-width: 740px;">
+    <header class="mb-8">
+      <h1 class="font-sans font-semibold mb-1" style="font-size: 2rem; color: var(--text);">
+        Notes
+      </h1>
+      <p class="font-sans text-sm" style="color: var(--muted);">
+        Working thoughts, fragments, and in-progress ideas.
+      </p>
+    </header>
+    <ul class="flex flex-col" style="max-width: 68ch;">
+      {notes.map((note) => (
+        <NoteListItem
+          title={note.data.title}
+          slug={note.slug}
+          date={note.data.date}
+          tags={note.data.tags}
+        />
+      ))}
+    </ul>
+  </div>
+</Base>

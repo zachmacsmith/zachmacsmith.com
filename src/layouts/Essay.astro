@@ -1,0 +1,51 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  description?: string;
+  tags?: string[];
+  readTime?: number;
+}
+
+const { title, date, description, tags = [], readTime } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Base title={`${title} — Zach Macaskill-Smith`} description={description} section="essays">
+  <article class="mx-auto px-6 py-12" style="max-width: 740px;">
+      <header class="mb-10">
+        <h1 class="font-sans font-semibold mb-2" style="font-size: 2.5rem; line-height: 1.15; color: var(--text);">
+          {title}
+        </h1>
+        {description && (
+          <p class="mb-3" style="font-size: 1.0625rem; line-height: 1.6; color: var(--muted);">
+            {description}
+          </p>
+        )}
+        <div class="font-sans text-sm flex flex-wrap items-center gap-2" style="color: var(--muted);">
+          <span>{formattedDate}</span>
+          {readTime && (
+            <>
+              <span>·</span>
+              <span>{readTime} min read</span>
+            </>
+          )}
+          {tags.length > 0 && (
+            <>
+              <span>·</span>
+              <span>{tags.join(', ')}</span>
+            </>
+          )}
+        </div>
+      </header>
+      <div class="prose-custom">
+        <slot />
+      </div>
+  </article>
+</Base>

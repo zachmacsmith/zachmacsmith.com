@@ -1,0 +1,97 @@
+---
+const currentPath = Astro.url.pathname;
+
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+}
+---
+
+<header style="border-bottom: 1px solid var(--border);">
+  <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a
+      href="/"
+      class="font-sans text-sm font-medium whitespace-nowrap"
+      style="color: var(--text); text-decoration: none;"
+    >
+      Zach Macaskill-Smith
+    </a>
+    <div class="flex items-center gap-7">
+      <a
+        href="/projects"
+        class="font-sans text-sm"
+        style={`text-decoration: none; color: ${isActive('/projects') ? 'var(--accent)' : 'var(--muted)'};`}
+      >
+        Projects
+      </a>
+      <a
+        href="/writing/essays"
+        class="font-sans text-sm"
+        style={`text-decoration: none; color: ${isActive('/writing/essays') ? 'var(--accent)' : 'var(--muted)'};`}
+      >
+        Essays
+      </a>
+      <a
+        href="/writing/notes"
+        class="font-sans text-sm"
+        style={`text-decoration: none; color: ${isActive('/writing/notes') ? 'var(--accent)' : 'var(--muted)'};`}
+      >
+        Notes
+      </a>
+      <button
+        id="theme-toggle"
+        class="font-sans text-xs"
+        style="color: var(--muted); background: none; border: none; cursor: pointer; padding: 0;"
+        aria-label="Toggle dark mode"
+      >
+        <span id="theme-label">auto</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const label = document.getElementById('theme-label');
+  const html = document.documentElement;
+
+  function getSystemDark() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function applyTheme(stored: string | null) {
+    if (stored === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      if (label) label.textContent = 'dark';
+    } else if (stored === 'light') {
+      html.setAttribute('data-theme', 'light');
+      if (label) label.textContent = 'light';
+    } else {
+      html.removeAttribute('data-theme');
+      if (label) label.textContent = 'auto';
+    }
+  }
+
+  // Init from storage
+  applyTheme(localStorage.getItem('theme'));
+
+  toggle?.addEventListener('click', () => {
+    const stored = localStorage.getItem('theme');
+    const systemDark = getSystemDark();
+
+    if (!stored) {
+      // Auto → force opposite of system
+      const next = systemDark ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    } else if (stored === 'dark') {
+      // Dark → light
+      localStorage.setItem('theme', 'light');
+      applyTheme('light');
+    } else {
+      // Light → back to auto
+      localStorage.removeItem('theme');
+      applyTheme(null);
+    }
+  });
+</script>

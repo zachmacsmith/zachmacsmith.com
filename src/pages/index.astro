@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import FeaturedSection from '../components/FeaturedSection.astro';
+import { getCollection } from 'astro:content';
+
+const essays = await getCollection('essays');
+const notes = await getCollection('notes');
+
+const allItems = [
+  ...essays.map((e) => ({
+    title: e.data.title,
+    href: `/writing/essays/${e.slug}`,
+    type: 'essay' as const,
+    date: e.data.date,
+  })),
+  ...notes.map((n) => ({
+    title: n.data.title,
+    href: `/writing/notes/${n.slug}`,
+    type: 'note' as const,
+    date: n.data.date,
+  })),
+].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 5);
+
+const featured = [
+  {
+    title: 'EMBER: Benchmarking Minor Embedding on D-Wave Hardware',
+    href: '/writing/essays/ember-benchmarking',
+    type: 'Essay' as const,
+    description: 'Why measuring embedding quality matters for quantum optimization, and what EMBER does about it.',
+  },
+  {
+    title: 'Predictive Processing and the Internal Models of Language Models',
+    href: '/writing/essays/predictive-processing-and-llms',
+    type: 'Essay' as const,
+    description: "The predictive processing framework as a lens for what LLMs are doing — and where the analogy breaks.",
+  },
+  {
+    title: 'EMBER',
+    href: '/projects',
+    type: 'Project' as const,
+    description: 'Quantum minor embedding benchmark suite for D-Wave hardware.',
+  },
+];
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+---
+
+<Base title="Zach Macaskill-Smith">
+  <div class="mx-auto px-6 py-16" style="max-width: 740px;">
+      <p class="mb-16" style="font-size: 1.125rem; line-height: 1.8; color: var(--text);">
+        I work on quantum computing and AI — specifically on the infrastructure and evaluation problems that sit between theoretical models and useful systems. I also write about philosophy of mind, language, and the places where those concerns intersect with technical practice. This site is where the work lives.
+      </p>
+
+      <FeaturedSection items={featured} />
+
+      <section>
+        <h2 class="font-sans text-xs uppercase tracking-widest mb-6" style="color: var(--muted); letter-spacing: 0.12em;">
+          Recent
+        </h2>
+        <ul class="flex flex-col">
+          {allItems.map((item) => (
+            <li class="py-3 flex items-baseline gap-4" style="border-bottom: 1px solid var(--border);">
+              <span class="font-sans text-xs italic shrink-0 w-8" style="color: var(--muted);">
+                {item.type}
+              </span>
+              <a
+                href={item.href}
+                class="font-sans text-sm flex-1 hover:underline"
+                style="color: var(--text); text-decoration: none;"
+              >
+                {item.title}
+              </a>
+              <span class="font-sans text-xs shrink-0 tabular-nums" style="color: var(--muted);">
+                {formatDate(item.date)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+  </div>
+</Base>

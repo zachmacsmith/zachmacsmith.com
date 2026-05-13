@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  date: Date;
+  description: string;
+  tags: string[];
+  readTime: number;
+}
+
+const { title, slug, date, description, tags, readTime } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<li class="py-5" style="border-bottom: 1px solid var(--border);">
+  <a href={`/writing/essays/${slug}`} style="text-decoration: none;">
+    <div class="mb-1">
+      <span class="font-sans font-medium text-base hover:underline" style="color: var(--text);">
+        {title}
+      </span>
+    </div>
+    <p class="text-sm mb-2" style="color: var(--muted); font-family: 'Inter', sans-serif; line-height: 1.55;">
+      {description}
+    </p>
+    <div class="font-sans text-xs flex gap-3" style="color: var(--muted);">
+      <span>{formattedDate}</span>
+      <span>{readTime} min</span>
+      {tags.map((tag) => <span>{tag}</span>)}
+    </div>
+  </a>
+</li>

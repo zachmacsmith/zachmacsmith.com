@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+---
+
+<Base title="Projects — Zach Macaskill-Smith" section="projects">
+  <div class="max-w-5xl mx-auto px-6 py-12">
+    <header class="mb-10">
+      <h1 class="font-sans font-semibold mb-2" style="font-size: 2rem; color: var(--text);">
+        Projects
+      </h1>
+      <p class="font-sans text-sm" style="color: var(--muted);">
+        Depth lives in the essays. This page is the index.
+      </p>
+    </header>
+    <div class="projects-grid">
+      {projects.map((project) => (
+        <ProjectCard {...project} />
+      ))}
+    </div>
+
+    <style is:global>
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        max-width: 860px;
+      }
+
+      /* Image cards span 2 rows so 2 text cards can stack beside them */
+      .projects-grid .project-card[data-has-image] {
+        grid-row: span 2;
+        align-self: stretch;
+      }
+
+      @media (max-width: 640px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .projects-grid .project-card[data-has-image] {
+          grid-row: span 1;
+        }
+      }
+    </style>
+  </div>
+</Base>

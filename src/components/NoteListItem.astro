@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  date: Date;
+  tags?: string[];
+}
+
+const { title, slug, date, tags = [] } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<li class="py-3 flex items-baseline gap-4" style="border-bottom: 1px solid var(--border);">
+  <span class="font-sans text-sm shrink-0 tabular-nums" style="color: var(--muted); min-width: 8rem;">
+    {formattedDate}
+  </span>
+  <a
+    href={`/writing/notes/${slug}`}
+    class="font-sans text-sm hover:underline"
+    style="color: var(--text); text-decoration: none;"
+  >
+    {title}
+    {tags.length > 0 && (
+      <span style="color: var(--muted);"> · {tags.join(', ')}</span>
+    )}
+  </a>
+</li>
