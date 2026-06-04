@@ -1,5 +1,5 @@
 ---
-title: "What are we to them?"
+title: "How do we decide what is right?"
 date: 2026-05-12
 description: "A dialogue on natural selection"
 tags: [philosophy, speculative, don't take this too seriously]
