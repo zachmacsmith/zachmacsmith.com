@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import EssayListItem from '../../../components/EssayListItem.astro';
 import { getCollection } from 'astro:content';
+import { copy, pageTitle } from '../../../data/copy';
 
 const essays = await getCollection('essays');
 essays.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -12,14 +13,14 @@ function estimateReadTime(body: string): number {
 }
 ---
 
-<Base title="Essays — Zach Macaskill-Smith" section="essays">
+<Base title={pageTitle(copy.essays)} section="essays">
   <div class="mx-auto px-6 py-12" style="max-width: 740px;">
     <header class="mb-8">
       <h1 class="font-sans font-semibold mb-1" style="font-size: 2rem; color: var(--text);">
-        Essays
+        {copy.essays.heading}
       </h1>
       <p class="font-sans text-sm" style="color: var(--muted);">
-        Finished pieces of writing, technical or not. 
+        {copy.essays.subtitle}
       </p>
     </header>
     <ul class="flex flex-col" style="max-width: 68ch;">

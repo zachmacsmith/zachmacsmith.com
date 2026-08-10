@@ -2,16 +2,17 @@
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects } from '../data/projects';
+import { copy, pageTitle } from '../data/copy';
 ---
 
-<Base title="Projects — Zach Macaskill-Smith" section="projects">
+<Base title={pageTitle(copy.projects)} section="projects">
   <div class="max-w-5xl mx-auto px-6 py-12">
     <header class="mb-10">
       <h1 class="font-sans font-semibold mb-2" style="font-size: 2rem; color: var(--text);">
-        Projects
+        {copy.projects.heading}
       </h1>
       <p class="font-sans text-sm" style="color: var(--muted);">
-        I built some stuff:
+        {copy.projects.subtitle}
       </p>
     </header>
     <div class="projects-grid">

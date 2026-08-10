@@ -2,20 +2,28 @@
 interface FeaturedItem {
   title: string;
   href: string;
-  type: 'Essay' | 'Note' | 'Project';
-  description: string;
+  type: 'essay' | 'note';
+  description?: string;
+  date: Date;
+  tags: string[];
+  readTime?: number;
 }
 
 interface Props {
   items: FeaturedItem[];
+  heading: string;
 }
 
-const { items } = Astro.props;
+const { items, heading } = Astro.props;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
 ---
 
 <section class="mb-14">
   <h2 class="font-sans text-xs uppercase tracking-widest mb-6" style="color: var(--muted); letter-spacing: 0.12em;">
-    Selected
+    {heading}
   </h2>
   <ul class="flex flex-col">
     {items.map((item) => (
@@ -23,15 +31,22 @@ const { items } = Astro.props;
         <a href={item.href} style="text-decoration: none;">
           <div class="flex items-baseline gap-3 mb-1">
             <span class="font-sans text-xs italic shrink-0" style="color: var(--muted);">
-              {item.type.toLowerCase()}
+              {item.type}
             </span>
             <span class="font-sans font-medium text-sm hover:underline" style="color: var(--text);">
               {item.title}
             </span>
           </div>
-          <p class="font-sans text-sm pl-12" style="color: var(--muted); line-height: 1.5;">
-            {item.description}
-          </p>
+          {item.description && (
+            <p class="font-sans text-sm pl-12 mb-2" style="color: var(--muted); line-height: 1.5;">
+              {item.description}
+            </p>
+          )}
+          <div class="font-sans text-xs flex flex-wrap gap-3 pl-12" style="color: var(--muted);">
+            <span>{formatDate(item.date)}</span>
+            {item.readTime && <span>{item.readTime} min</span>}
+            {item.tags.map((tag) => <span>{tag}</span>)}
+          </div>
         </a>
       </li>
     ))}

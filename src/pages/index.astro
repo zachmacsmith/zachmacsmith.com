@@ -2,9 +2,15 @@
 import Base from '../layouts/Base.astro';
 import FeaturedSection from '../components/FeaturedSection.astro';
 import { getCollection } from 'astro:content';
+import { copy, pageTitle } from '../data/copy';
 
 const essays = await getCollection('essays');
 const notes = await getCollection('notes');
+
+function estimateReadTime(body: string): number {
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
 
 const allItems = [
   ...essays.map((e) => ({
@@ -21,37 +27,49 @@ const allItems = [
   })),
 ].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 5);
 
+// Featured items come straight from each piece's own frontmatter (`featured: true`).
+// Nothing here is hand-entered, so the home page can never drift from the page it links to.
 const featured = [
-  {
-    title: 'EMBER: A Benchmarking Framework for Minor Graph Embedding',
-    href: '/writing/essays/ember-benchmarking',
-    type: 'Essay' as const,
-    description: 'Why measuring embedding quality matters for quantum optimization, and what EMBER does about it.',
-  },
-  {
-    title: 'Security: Best Before 2026',
-    href: '/writing/essays/why-we-need-qkd',
-    type: 'Essay' as const,
-    description: 'Why the world desperately needs QKD — and why the clock is already running.',
-  },
-];
+  ...essays
+    .filter((e) => e.data.featured)
+    .map((e) => ({
+      title: e.data.title,
+      href: `/writing/essays/${e.slug}`,
+      type: 'essay' as const,
+      description: e.data.description,
+      date: e.data.date,
+      tags: e.data.tags,
+      readTime: estimateReadTime(e.body),
+    })),
+  ...notes
+    .filter((n) => n.data.featured)
+    .map((n) => ({
+      title: n.data.title,
+      href: `/writing/notes/${n.slug}`,
+      type: 'note' as const,
+      description: undefined,
+      date: n.data.date,
+      tags: n.data.tags,
+      readTime: undefined,
+    })),
+].sort((a, b) => b.date.getTime() - a.date.getTime());
 
 function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 ---
 
-<Base title="Zach Macaskill-Smith">
+<Base title={pageTitle(copy.home)}>
   <div class="mx-auto px-6 py-16" style="max-width: 740px;">
       <p class="mb-16" style="font-size: 1.125rem; line-height: 1.8; color: var(--text);">
-        I work on quantum computing and AI and some other stuff. I made this website.
+        {copy.home.intro}
       </p>
 
-      <FeaturedSection items={featured} />
+      <FeaturedSection items={featured} heading={copy.home.featuredHeading} />
 
       <section>
         <h2 class="font-sans text-xs uppercase tracking-widest mb-6" style="color: var(--muted); letter-spacing: 0.12em;">
-          Recent
+          {copy.home.recentHeading}
         </h2>
         <ul class="flex flex-col">
           {allItems.map((item) => (

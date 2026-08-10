@@ -3,6 +3,7 @@ title: "Security: Best Before 2026"
 date: 2026-04-20
 description: "Why the world desperately needs QKD"
 tags: [QKD, nonfiction, take this VERY seriously]
+featured: true
 ---
 
 It is increasingly accepted we are in an age of dwindling privacy, but few realize how much worse this will get. Our entire information society is built with an unintended skeleton key: a backdoor for anyone with a quantum computer to circumvent all security. With these devices years away, this may seem like a distant risk. However, any communications right now can easily be stored and later decrypted once the technology arrives. Luckily, a solution exists: quantum communication. While current encryption relies on assumptions quantum computers will soon invalidate, quantum communication uses fundamental physical laws to keep information provably hidden regardless of technological progress. Engineering challenges exist but can be solved with a space-based CubeSat constellation that is not just possible but urgent. The longer we wait, the more secrets are irreversibly lost in the approach of a potentially trillion-dollar catastrophe. 

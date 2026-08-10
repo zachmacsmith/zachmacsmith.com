@@ -2,19 +2,20 @@
 import Base from '../../../layouts/Base.astro';
 import NoteListItem from '../../../components/NoteListItem.astro';
 import { getCollection } from 'astro:content';
+import { copy, pageTitle } from '../../../data/copy';
 
 const notes = await getCollection('notes');
 notes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<Base title="Notes — Zach Macaskill-Smith" section="notes">
+<Base title={pageTitle(copy.notes)} section="notes">
   <div class="mx-auto px-6 py-12" style="max-width: 740px;">
     <header class="mb-8">
       <h1 class="font-sans font-semibold mb-1" style="font-size: 2rem; color: var(--text);">
-        Notes
+        {copy.notes.heading}
       </h1>
       <p class="font-sans text-sm" style="color: var(--muted);">
-        Working thoughts, fragments, and in-progress ideas.
+        {copy.notes.subtitle}
       </p>
     </header>
     <ul class="flex flex-col" style="max-width: 68ch;">

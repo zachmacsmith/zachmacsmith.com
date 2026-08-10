@@ -1,5 +1,6 @@
 ---
 import Base from './Base.astro';
+import { copy } from '../data/copy';
 
 interface Props {
   title: string;
@@ -17,7 +18,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<Base title={`${title} — Zach Macaskill-Smith`} description={description} section="essays">
+<Base title={`${title} — ${copy.siteName}`} description={description} section="essays">
   <article class="mx-auto px-6 py-12" style="max-width: 740px;">
       <header class="mb-10">
         <h1 class="font-sans font-semibold mb-2" style="font-size: 2.5rem; line-height: 1.15; color: var(--text);">

@@ -17,6 +17,7 @@ const notes = defineCollection({
     title: z.string(),
     date: z.date(),
     tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
   }),
 });
 
