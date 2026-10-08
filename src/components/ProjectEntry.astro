@@ -9,7 +9,7 @@ type Props = Project & {
 const {
   variant = 'compact',
   title, description, status, year, summary, recognition,
-  image, imageAlt, imageCaption, imageFocus,
+  image, imageAlt, imageCaption, imageFocus, video,
   github, pypi, paper, demo, blog, link,
 } = Astro.props;
 
@@ -32,7 +32,9 @@ const meta = [year, status].filter(Boolean).join(' · ');
 
 {variant === 'compact' ? (
   <div class="project">
-    {image
+    {video
+      ? <video class="project-fig" src={video} poster={image} aria-label={figureAlt} style={figureStyle} autoplay loop muted playsinline preload="metadata"></video>
+      : image
       ? <img class="project-fig" src={image} alt={figureAlt} style={figureStyle} loading="lazy" />
       : <div class="project-fig project-fig-empty" aria-hidden="true"></div>}
     <div class="project-body">
@@ -54,9 +56,11 @@ const meta = [year, status].filter(Boolean).join(' · ');
   </div>
 ) : (
   <article class="project-full" id={slug}>
-    {image && (
+    {(image || video) && (
       <figure>
-        <img src={image} alt={figureAlt} style={figureStyle} loading="lazy" />
+        {video
+          ? <video src={video} poster={image} aria-label={figureAlt} style={figureStyle} autoplay loop muted playsinline preload="metadata"></video>
+          : <img src={image} alt={figureAlt} style={figureStyle} loading="lazy" />}
         {imageCaption && <figcaption>{imageCaption}</figcaption>}
       </figure>
     )}

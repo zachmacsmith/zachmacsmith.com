@@ -178,7 +178,7 @@
 
   .project-full figure { margin: 0 0 6px; display: grid; gap: 6px; }
   /* Every project photo is cropped to the same 16:9 frame; `imageFocus` picks the crop. */
-  .project-full img {
+  .project-full img, .project-full video {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;

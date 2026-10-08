@@ -14,6 +14,8 @@ export interface Project {
   imageCaption?: string;
   /** Which part of the photo to keep when it's cropped to 16:9, as CSS object-position ("center 60%"). */
   imageFocus?: string;
+  /** Short muted clip that loops in place of the image (which becomes its poster frame). */
+  video?: string;
   /** Always show on the home page, even if it isn't one of the newest three. */
   starred?: boolean;
   tags: string[];
@@ -66,9 +68,10 @@ export const projects: Project[] = [
     summary: [
       'WISP coordinates a flock of drones to collect the data that most reduces uncertainty in wildfire spread prediction. Gaussian processes estimate fuel moisture and wind from sparse observations, an ensemble of up to 1,000 fire simulations measures how much each uncertain point actually matters, and drone paths are optimized over the resulting information field. In a simulation built on terrain around the Palisades fire, WISP finished two hours with 4.7–7× lower prediction error than a baseline without drones. Built and tested in under six days.',
     ],
-    image: '/images/projects/wisp-whiteboard.jpg',
-    imageAlt: 'The WISP team standing in front of whiteboards covered in the system architecture',
-    imageCaption: 'The team in front of the WISP architecture.',
+    image: '/images/projects/wisp-poster.jpg',
+    video: '/videos/wisp.mp4',
+    imageAlt: 'A simulated wildfire spreading over terrain while a drone flies a path around it, gathering data',
+    imageCaption: "WISP's live estimate of fire arrival time as a drone gathers data.",
     tags: ['Python', 'Predictive Processing'],
     github: 'https://github.com/zachmacsmith/wisp',
     demo: 'https://www.youtube.com/watch?v=rncma70ddg4',
@@ -99,6 +102,9 @@ export const projects: Project[] = [
     summary: [
       'An extensible architecture for testing modular hybrid LLM and computer-vision models on egocentric construction footage, grown out of the Ironsite AI hackathon. We designed and benchmarked 9 models, improving macro-F1 by 60% at 4× the speed and measuring wrench time with 80% accuracy. It placed 4th of 15 at the Ironsite hackathon and 3rd of 30+ at the Vanderbilt AI research showcase.',
     ],
+    image: '/images/projects/spatial-ai-poster.jpg',
+    video: '/videos/spatial-ai.mp4',
+    imageAlt: 'First-person construction footage of workers measuring a sheet of plywood',
     tags: ['Python'],
   },
   {
