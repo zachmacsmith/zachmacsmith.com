@@ -1,32 +1,24 @@
 ---
 import Base from '../../../layouts/Base.astro';
-import NoteListItem from '../../../components/NoteListItem.astro';
+import DatedList from '../../../components/DatedList.astro';
 import { getCollection } from 'astro:content';
 import { copy, pageTitle } from '../../../data/copy';
 
 const notes = await getCollection('notes');
-notes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const items = notes
+  .map((n) => ({
+    title: n.data.title,
+    href: `/writing/notes/${n.slug}`,
+    date: n.data.date,
+    description: n.data.tags.length > 0 ? n.data.tags.join(', ') : undefined,
+  }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
 ---
 
-<Base title={pageTitle(copy.notes)} section="notes">
-  <div class="mx-auto px-6 py-12" style="max-width: 740px;">
-    <header class="mb-8">
-      <h1 class="font-sans font-semibold mb-1" style="font-size: 2rem; color: var(--text);">
-        {copy.notes.heading}
-      </h1>
-      <p class="font-sans text-sm" style="color: var(--muted);">
-        {copy.notes.subtitle}
-      </p>
-    </header>
-    <ul class="flex flex-col" style="max-width: 68ch;">
-      {notes.map((note) => (
-        <NoteListItem
-          title={note.data.title}
-          slug={note.slug}
-          date={note.data.date}
-          tags={note.data.tags}
-        />
-      ))}
-    </ul>
+<Base title={pageTitle(copy.notes)}>
+  <div class="col">
+    <h1 class="page-title">{copy.notes.heading}</h1>
+    <p class="page-subtitle">{copy.notes.subtitle}</p>
+    <DatedList items={items} />
   </div>
 </Base>

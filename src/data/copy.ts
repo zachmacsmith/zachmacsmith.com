@@ -12,7 +12,7 @@ interface PageCopy {
 interface SiteCopy {
   siteName: string;
   metaDescription: string;
-  home: PageCopy & { intro: string; featuredHeading: string; recentHeading: string };
+  home: PageCopy & { projectsHeading: string; writingHeading: string };
   projects: PageCopy;
   essays: PageCopy;
   notes: PageCopy;

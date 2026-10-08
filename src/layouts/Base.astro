@@ -7,10 +7,9 @@ import { copy } from '../data/copy';
 interface Props {
   title: string;
   description?: string;
-  section?: 'projects' | 'essays' | 'notes';
 }
 
-const { title, description = copy.metaDescription, section } = Astro.props;
+const { title, description = copy.metaDescription } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,7 +28,7 @@ const { title, description = copy.metaDescription, section } = Astro.props;
       }
     </script>
   </head>
-  <body data-section={section}>
+  <body>
     <Nav />
     <main>
       <slot />

@@ -1,0 +1,30 @@
+---
+export interface DatedItem {
+  title: string;
+  href: string;
+  date: Date;
+  description?: string;
+}
+
+interface Props {
+  items: DatedItem[];
+}
+
+const { items } = Astro.props;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+---
+
+<ul class="dated-list">
+  {items.map((item) => (
+    <li>
+      <span class="date">{formatDate(item.date)}</span>
+      <span>
+        <a href={item.href}>{item.title}</a>
+        {item.description && <span class="desc"> {item.description}</span>}
+      </span>
+    </li>
+  ))}
+</ul>

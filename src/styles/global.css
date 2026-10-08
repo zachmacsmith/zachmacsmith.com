@@ -1,179 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Light mode: section palettes ─────────────────────────────────────── */
+/* ─── Palette ───────────────────────────────────────────────────────────────
+   One plain palette for the whole site: white page, black text, one link blue.
+   Dark mode is the same layout with inverted neutrals. */
 
-body {
-  --bg:      #F4F5F3;
-  --surface: #E6E9E5;
-  --muted:   #8E9689;
-  --accent:  #4A5D52;
-  --text:    #1E2B25;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+:root {
+  --bg:      #FFFFFF;
+  --surface: #F4F4F2;
+  --muted:   #6A6A6A;
+  --accent:  #1F4E99;
+  --text:    #111111;
+  --border:  #E2E2E2;
 }
-
-body[data-section="projects"] {
-  --bg:      #F0F4F8;
-  --surface: #DDE8F0;
-  --muted:   #7A9BB8;
-  --accent:  #2A5B8A;
-  --text:    #142A40;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-}
-
-body[data-section="essays"] {
-  --bg:      #F0F6F4;
-  --surface: #DCF0E8;
-  --muted:   #6EAA96;
-  --accent:  #1E6B5A;
-  --text:    #0E2E26;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-}
-
-body[data-section="notes"] {
-  --bg:      #F5F2ED;
-  --surface: #E8E0D4;
-  --muted:   #A8937A;
-  --accent:  #6B4D2E;
-  --text:    #2C1E10;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-}
-
-/* ─── Dark mode: system preference ─────────────────────────────────────── */
 
 @media (prefers-color-scheme: dark) {
-  body {
-    --bg:      #141C18;
-    --surface: #1E2B25;
-    --muted:   #5E6B5F;
-    --accent:  #7FB09A;
-    --text:    #D4DDD2;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-
-  body[data-section="projects"] {
-    --bg:      #0E1E2E;
-    --surface: #18304A;
-    --muted:   #4A6A80;
-    --accent:  #5A9FD4;
-    --text:    #D0DDE8;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-
-  body[data-section="essays"] {
-    --bg:      #0A1E1A;
-    --surface: #143830;
-    --muted:   #3A7A68;
-    --accent:  #4CC4A0;
-    --text:    #C8E8DA;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-
-  body[data-section="notes"] {
-    --bg:      #18120A;
-    --surface: #2C1E10;
-    --muted:   #6B5840;
-    --accent:  #C8A060;
-    --text:    #DDD0C0;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+  :root:not([data-theme="light"]) {
+    --bg:      #151617;
+    --surface: #202224;
+    --muted:   #9B9DA0;
+    --accent:  #8DB0EA;
+    --text:    #E4E4E2;
+    --border:  #2C2E31;
+    color-scheme: dark;
   }
 }
 
-/* ─── Manual override: force dark (even when system is light) ───────────── */
-
-html[data-theme="dark"] body {
-  --bg:      #141C18;
-  --surface: #1E2B25;
-  --muted:   #5E6B5F;
-  --accent:  #7FB09A;
-  --text:    #D4DDD2;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
+:root[data-theme="dark"] {
+  --bg:      #151617;
+  --surface: #202224;
+  --muted:   #9B9DA0;
+  --accent:  #8DB0EA;
+  --text:    #E4E4E2;
+  --border:  #2C2E31;
+  color-scheme: dark;
 }
 
-html[data-theme="dark"] body[data-section="projects"] {
-  --bg:      #0E1E2E;
-  --surface: #18304A;
-  --muted:   #4A6A80;
-  --accent:  #5A9FD4;
-  --text:    #D0DDE8;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-}
-
-html[data-theme="dark"] body[data-section="essays"] {
-  --bg:      #0A1E1A;
-  --surface: #143830;
-  --muted:   #3A7A68;
-  --accent:  #4CC4A0;
-  --text:    #C8E8DA;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-}
-
-html[data-theme="dark"] body[data-section="notes"] {
-  --bg:      #18120A;
-  --surface: #2C1E10;
-  --muted:   #6B5840;
-  --accent:  #C8A060;
-  --text:    #DDD0C0;
-  --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-}
-
-/* ─── Manual override: force light (even when system is dark) ───────────── */
-
-@media (prefers-color-scheme: dark) {
-  html[data-theme="light"] body {
-    --bg:      #F4F5F3;
-    --surface: #E6E9E5;
-    --muted:   #8E9689;
-    --accent:  #4A5D52;
-    --text:    #1E2B25;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-
-  html[data-theme="light"] body[data-section="projects"] {
-    --bg:      #F0F4F8;
-    --surface: #DDE8F0;
-    --muted:   #7A9BB8;
-    --accent:  #2A5B8A;
-    --text:    #142A40;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-
-  html[data-theme="light"] body[data-section="essays"] {
-    --bg:      #F0F6F4;
-    --surface: #DCF0E8;
-    --muted:   #6EAA96;
-    --accent:  #1E6B5A;
-    --text:    #0E2E26;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-
-  html[data-theme="light"] body[data-section="notes"] {
-    --bg:      #F5F2ED;
-    --surface: #E8E0D4;
-    --muted:   #A8937A;
-    --accent:  #6B4D2E;
-    --text:    #2C1E10;
-    --border:  color-mix(in srgb, var(--muted) 30%, var(--bg));
-  }
-}
-
-/* ─── Base styles ───────────────────────────────────────────────────────── */
+/* ─── Base ──────────────────────────────────────────────────────────────── */
 
 @layer base {
   html {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 18px;
-    line-height: 1.7;
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
   body {
     background-color: var(--bg);
     color: var(--text);
-    transition: background-color 0.15s, color 0.15s;
     min-height: 100vh;
   }
 
@@ -192,92 +70,279 @@ html[data-theme="dark"] body[data-section="notes"] {
   }
 }
 
+/* ─── Site layout ───────────────────────────────────────────────────────── */
+
+@layer components {
+  /* Every page is one centred reading column. Essays hang sidenotes off its right edge. */
+  .col {
+    max-width: 660px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  .muted { color: var(--muted); }
+
+  /* Same header on every page: name on top, links underneath. */
+  .site-header {
+    padding-top: 40px;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .site-header .site-name {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 18px;
+    font-size: 0.95rem;
+  }
+
+  .site-nav a[aria-current="page"] { color: var(--text); }
+
+  .theme-toggle {
+    font: inherit;
+    font-size: 0.85rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .site-footer {
+    margin-top: 72px;
+    padding-block: 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 0.88rem;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+
+  .page-section { margin-bottom: 40px; }
+
+  .page-section > h2,
+  .page-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .page-title { font-size: 1.5rem; margin-bottom: 4px; }
+  .page-subtitle { color: var(--muted); margin-bottom: 28px; }
+
+  /* Intro text wraps around the photo, then continues full width underneath it. */
+  .intro {
+    margin-bottom: 36px;
+    display: flow-root;
+  }
+
+  .intro p { margin-bottom: 0.9em; }
+  .intro p:last-child { margin-bottom: 0; }
+
+  .intro a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .intro-photo {
+    float: right;
+    width: 170px;
+    height: auto;
+    margin: 4px 0 12px 24px;
+  }
+
+  @media (max-width: 520px) {
+    .intro-photo { width: 120px; margin-left: 16px; }
+  }
+
+  /* Projects page: photo, then title, breakdown and links. */
+  .project-full {
+    display: grid;
+    gap: 10px;
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-full figure { margin: 0 0 6px; display: grid; gap: 6px; }
+  /* Every project photo is cropped to the same 16:9 frame; `imageFocus` picks the crop. */
+  .project-full img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .project-full figcaption { font-size: 0.88rem; color: var(--muted); }
+
+  .project-full-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+
+  .project-full-head h2 { font-size: 1.3rem; font-weight: 600; }
+  .project-full-head h2 a { color: var(--text); }
+  .project-full .project-desc { font-style: italic; color: var(--muted); }
+
+  .recognition {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  /* Projects: small figure on the left, text on the right. */
+  .project {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 10px;
+  }
+
+
+  .project-fig {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .project-body { display: grid; gap: 3px; align-content: start; }
+  .project-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
+  .project-title { font-weight: 600; }
+  .project-desc { font-size: 0.95rem; }
+  .project-links { font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 10px; }
+  .project-fig-empty { background: var(--surface); }
+  .more { margin-top: 8px; }
+
+  @media (max-width: 520px) {
+    .project { grid-template-columns: minmax(0, 1fr); }
+    .project-fig { max-width: 260px; }
+  }
+
+  /* Dated list of writing. */
+  .dated-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .dated-list li {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .dated-list .date {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+
+  .dated-list .desc { color: var(--muted); font-style: italic; font-size: 0.95rem; }
+
+  @media (max-width: 520px) {
+    .dated-list li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  }
+
+  /* Essay / note header. */
+  .article-header { margin-bottom: 32px; display: grid; gap: 6px; }
+  .article-header h1 { font-size: 2rem; font-weight: 600; line-height: 1.2; text-wrap: balance; }
+  .article-header .subtitle { color: var(--muted); font-size: 1.1rem; }
+  .article-header .meta { color: var(--muted); font-size: 0.9rem; }
+}
+
 /* ─── Prose ─────────────────────────────────────────────────────────────── */
 
 @layer components {
   .prose-custom {
-    max-width: 68ch;
     font-size: 1.0625rem;
-    line-height: 1.75;
+    line-height: 1.7;
   }
 
   .prose-custom h1,
   .prose-custom h2,
   .prose-custom h3,
   .prose-custom h4 {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.3;
     margin-top: 2em;
-    margin-bottom: 0.75em;
+    margin-bottom: 0.6em;
     color: var(--text);
+    text-wrap: balance;
   }
 
-  .prose-custom h1 { font-size: 1.75rem; }
-  .prose-custom h2 { font-size: 1.375rem; }
-  .prose-custom h3 { font-size: 1.125rem; }
+  .prose-custom h1 { font-size: 1.6rem; }
+  .prose-custom h2 { font-size: 1.3rem; }
+  .prose-custom h3 { font-size: 1.1rem; }
 
-  .prose-custom p { margin-bottom: 1.4em; }
+  .prose-custom p { margin-bottom: 1.3em; }
 
   .prose-custom ul,
   .prose-custom ol {
     margin-left: 1.5em;
-    margin-bottom: 1.4em;
+    margin-bottom: 1.3em;
   }
 
+  .prose-custom ul { list-style: disc; }
+  .prose-custom ol { list-style: decimal; }
   .prose-custom li { margin-bottom: 0.4em; }
 
   .prose-custom blockquote {
-    border-left: 3px solid var(--border);
-    padding-left: 1.25em;
+    border-left: 2px solid var(--border);
+    padding-left: 1.1em;
     color: var(--muted);
     font-style: italic;
-    margin: 1.75em 0;
+    margin: 1.6em 0;
   }
 
   .prose-custom code {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.875em;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.85em;
     background: var(--surface);
-    padding: 0.15em 0.4em;
+    padding: 0.1em 0.35em;
     border-radius: 3px;
-    color: var(--text);
   }
 
   .prose-custom pre {
     background: var(--surface);
-    padding: 1.25em;
-    border-radius: 4px;
+    padding: 1.1em;
     overflow-x: auto;
-    margin: 1.75em 0;
+    margin: 1.6em 0;
     border: 1px solid var(--border);
   }
 
-  .prose-custom pre code {
-    background: none;
-    padding: 0;
-  }
+  .prose-custom pre code { background: none; padding: 0; }
 
   .prose-custom img {
     width: 100%;
-    border-radius: 4px;
-    margin: 1.75em 0;
+    margin: 1.6em 0;
   }
 
-  .prose-custom figure {
-    margin: 1.75em 0;
-  }
-
-  .prose-custom figure img {
-    margin: 0;
-  }
+  .prose-custom figure { margin: 1.6em 0; }
+  .prose-custom figure img { margin: 0; }
 
   .prose-custom figcaption {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-size: 0.8125rem;
+    font-size: 0.88rem;
     color: var(--muted);
     margin-top: 0.5em;
-    text-align: center;
   }
 
   .prose-custom hr {
@@ -287,38 +352,67 @@ html[data-theme="dark"] body[data-section="notes"] {
   }
 
   .prose-custom a {
-    color: var(--accent);
     text-decoration: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 2px;
+  }
+
+  .prose-custom sup { line-height: 0; }
+
+  .prose-custom sup a[data-footnote-ref] {
+    text-decoration: none;
+    font-size: 0.8em;
+    padding-inline: 0.1em;
   }
 
   .prose-custom .footnotes {
     margin-top: 3em;
     padding-top: 1.5em;
     border-top: 1px solid var(--border);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     color: var(--muted);
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
   }
 
-  .prose-custom .footnotes ol {
-    list-style-type: decimal;
-    margin-left: 1.25em;
-  }
-
-  .prose-custom .footnotes li {
-    margin-bottom: 0.5em;
-    padding-left: 0.25em;
-  }
-
-  .prose-custom .footnotes li p {
-    margin-bottom: 0;
-    display: inline;
-  }
+  .prose-custom .footnotes ol { margin-left: 1.25em; }
+  .prose-custom .footnotes li { margin-bottom: 0.5em; padding-left: 0.25em; }
+  .prose-custom .footnotes li p { margin-bottom: 0; display: inline; }
 
   .prose-custom .footnotes a[data-footnote-backref] {
     margin-left: 0.35em;
     text-decoration: none;
     color: var(--muted);
+  }
+
+  /* ─── Sidenotes ───────────────────────────────────────────────────────────
+     Essay.astro copies each footnote next to its reference as a .sidenote.
+     On wide screens they float into the right margin and the footnote list
+     at the bottom is hidden; on narrow screens (or without JS) the normal
+     footnotes are used instead. */
+
+  .sidenote { display: none; }
+
+  @media (min-width: 1240px) {
+    .has-sidenotes .sidenote {
+      display: block;
+      float: right;
+      clear: right;
+      width: 230px;
+      margin-right: -266px;
+      margin-bottom: 0.9em;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: var(--muted);
+      font-style: normal;
+      font-weight: 400;
+      text-align: left;
+    }
+
+    .has-sidenotes .sidenote-num {
+      color: var(--text);
+      font-size: 0.9em;
+      margin-right: 0.3em;
+    }
+
+    .has-sidenotes .footnotes { display: none; }
   }
 }

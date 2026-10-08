@@ -16,37 +16,82 @@ const formattedDate = date.toLocaleDateString('en-US', {
   month: 'long',
   year: 'numeric',
 });
+
+const meta = [
+  formattedDate,
+  ...(readTime ? [`${readTime} min read`] : []),
+  ...(tags.length > 0 ? [tags.join(', ')] : []),
+].join(' · ');
 ---
 
-<Base title={`${title} — ${copy.siteName}`} description={description} section="essays">
-  <article class="mx-auto px-6 py-12" style="max-width: 740px;">
-      <header class="mb-10">
-        <h1 class="font-sans font-semibold mb-2" style="font-size: 2.5rem; line-height: 1.15; color: var(--text);">
-          {title}
-        </h1>
-        {description && (
-          <p class="mb-3" style="font-size: 1.0625rem; line-height: 1.6; color: var(--muted);">
-            {description}
-          </p>
-        )}
-        <div class="font-sans text-sm flex flex-wrap items-center gap-2" style="color: var(--muted);">
-          <span>{formattedDate}</span>
-          {readTime && (
-            <>
-              <span>·</span>
-              <span>{readTime} min read</span>
-            </>
-          )}
-          {tags.length > 0 && (
-            <>
-              <span>·</span>
-              <span>{tags.join(', ')}</span>
-            </>
-          )}
-        </div>
-      </header>
-      <div class="prose-custom">
-        <slot />
-      </div>
+<Base title={`${title} — ${copy.siteName}`} description={description}>
+  <article class="col">
+    <header class="article-header">
+      <h1>{title}</h1>
+      {description && <p class="subtitle">{description}</p>}
+      <p class="meta">{meta}</p>
+    </header>
+    <div class="prose-custom" id="essay-body">
+      <slot />
+    </div>
   </article>
 </Base>
+
+<script>
+  // Turn markdown footnotes into sidenotes. Each footnote is copied next to its
+  // first reference as a <span class="sidenote">; CSS floats these into the right
+  // margin on wide screens and hides the footnote list. Narrow screens keep the
+  // normal footnotes at the bottom.
+  const body = document.getElementById('essay-body');
+  const done = new Set<string>();
+
+  function makeSidenote(ref: HTMLAnchorElement): HTMLElement | null {
+    const id = ref.getAttribute('href')?.slice(1);
+    if (!id || done.has(id)) return null;
+    const item = document.getElementById(id);
+    if (!item) return null;
+    done.add(id);
+
+    const note = document.createElement('span');
+    note.className = 'sidenote';
+
+    const num = document.createElement('span');
+    num.className = 'sidenote-num';
+    num.textContent = ref.textContent;
+    note.append(num);
+
+    item.querySelectorAll(':scope > p').forEach((p, i) => {
+      if (i > 0) note.append(document.createElement('br'));
+      p.childNodes.forEach((n) => note.append(n.cloneNode(true)));
+    });
+    note.querySelectorAll('[data-footnote-backref]').forEach((a) => a.remove());
+    note.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+    return note;
+  }
+
+  // Place a note after its reference, then any footnotes it references after it.
+  function place(ref: HTMLAnchorElement, after: Element) {
+    const note = makeSidenote(ref);
+    if (!note) return;
+    after.after(note);
+    let last: Element = note;
+    note.querySelectorAll<HTMLAnchorElement>('a[data-footnote-ref]').forEach((inner) => {
+      const nested = makeSidenote(inner);
+      if (nested) {
+        last.after(nested);
+        last = nested;
+      }
+      // The footnote list is hidden alongside sidenotes, so keep the number but drop the link.
+      inner.replaceWith(inner.textContent ?? '');
+    });
+  }
+
+  if (body) {
+    const refs = body.querySelectorAll<HTMLAnchorElement>('a[data-footnote-ref]');
+    refs.forEach((ref) => {
+      if (ref.closest('.footnotes, .sidenote')) return;
+      place(ref, ref.closest('sup') ?? ref);
+    });
+    if (done.size > 0) body.classList.add('has-sidenotes');
+  }
+</script>

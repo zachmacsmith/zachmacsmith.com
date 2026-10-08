@@ -1,95 +1,50 @@
 ---
 import Base from '../layouts/Base.astro';
-import FeaturedSection from '../components/FeaturedSection.astro';
+import ProjectEntry from '../components/ProjectEntry.astro';
+import DatedList from '../components/DatedList.astro';
 import { getCollection } from 'astro:content';
+import { projects } from '../data/projects';
 import { copy, pageTitle } from '../data/copy';
+import { Content as Intro } from '../data/home-intro.md';
 
 const essays = await getCollection('essays');
 const notes = await getCollection('notes');
 
-function estimateReadTime(body: string): number {
-  const words = body.trim().split(/\s+/).length;
-  return Math.max(1, Math.round(words / 200));
-}
-
-const allItems = [
+const writing = [
   ...essays.map((e) => ({
     title: e.data.title,
     href: `/writing/essays/${e.slug}`,
-    type: 'essay' as const,
     date: e.data.date,
+    description: e.data.description,
   })),
   ...notes.map((n) => ({
     title: n.data.title,
     href: `/writing/notes/${n.slug}`,
-    type: 'note' as const,
     date: n.data.date,
   })),
-].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 5);
-
-// Featured items come straight from each piece's own frontmatter (`featured: true`).
-// Nothing here is hand-entered, so the home page can never drift from the page it links to.
-const featured = [
-  ...essays
-    .filter((e) => e.data.featured)
-    .map((e) => ({
-      title: e.data.title,
-      href: `/writing/essays/${e.slug}`,
-      type: 'essay' as const,
-      description: e.data.description,
-      date: e.data.date,
-      tags: e.data.tags,
-      readTime: estimateReadTime(e.body),
-    })),
-  ...notes
-    .filter((n) => n.data.featured)
-    .map((n) => ({
-      title: n.data.title,
-      href: `/writing/notes/${n.slug}`,
-      type: 'note' as const,
-      description: undefined,
-      date: n.data.date,
-      tags: n.data.tags,
-      readTime: undefined,
-    })),
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
-function formatDate(date: Date) {
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
+// The home page shows the three newest projects plus any starred ones, in list order.
+const featured = projects.filter((p, i) => i < 3 || p.starred);
+const hasMore = featured.length < projects.length;
 ---
 
 <Base title={pageTitle(copy.home)}>
-  <div class="mx-auto px-6 py-16" style="max-width: 740px;">
-      <p class="mb-16" style="font-size: 1.125rem; line-height: 1.8; color: var(--text);">
-        {copy.home.intro}
-      </p>
+  <div class="col">
+    <div class="intro">
+      <img class="intro-photo" src="/images/home/lab.jpg" alt="Zach aligning optics on a lab bench" width="900" height="1200" />
+      <Intro />
+    </div>
 
-      <FeaturedSection items={featured} heading={copy.home.featuredHeading} />
+    <section class="page-section">
+      <h2>{copy.home.projectsHeading}</h2>
+      {featured.map((project) => <ProjectEntry {...project} />)}
+      {hasMore && <p class="more"><a href="/projects">More projects…</a></p>}
+    </section>
 
-      <section>
-        <h2 class="font-sans text-xs uppercase tracking-widest mb-6" style="color: var(--muted); letter-spacing: 0.12em;">
-          {copy.home.recentHeading}
-        </h2>
-        <ul class="flex flex-col">
-          {allItems.map((item) => (
-            <li class="py-3 flex items-baseline gap-4" style="border-bottom: 1px solid var(--border);">
-              <span class="font-sans text-xs italic shrink-0 w-8" style="color: var(--muted);">
-                {item.type}
-              </span>
-              <a
-                href={item.href}
-                class="font-sans text-sm flex-1 hover:underline"
-                style="color: var(--text); text-decoration: none;"
-              >
-                {item.title}
-              </a>
-              <span class="font-sans text-xs shrink-0 tabular-nums" style="color: var(--muted);">
-                {formatDate(item.date)}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
+    <section class="page-section">
+      <h2>{copy.home.writingHeading}</h2>
+      <DatedList items={writing} />
+    </section>
   </div>
 </Base>

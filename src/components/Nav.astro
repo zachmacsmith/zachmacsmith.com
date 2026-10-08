@@ -1,53 +1,29 @@
 ---
+import { getCollection } from 'astro:content';
 import { copy } from '../data/copy';
-const currentPath = Astro.url.pathname;
 
-function isActive(path: string) {
-  if (path === '/') return currentPath === '/';
-  return currentPath.startsWith(path);
-}
+const currentPath = Astro.url.pathname;
+const hasNotes = (await getCollection('notes')).length > 0;
+
+const links = [
+  { href: '/projects', label: copy.projects.heading },
+  { href: '/writing/essays', label: copy.essays.heading },
+  ...(hasNotes ? [{ href: '/writing/notes', label: copy.notes.heading }] : []),
+];
 ---
 
-<header style="border-bottom: 1px solid var(--border);">
-  <nav class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a
-      href="/"
-      class="font-sans text-sm font-medium whitespace-nowrap"
-      style="color: var(--text); text-decoration: none;"
-    >
-      {copy.siteName}
-    </a>
-    <div class="flex items-center gap-7">
-      <a
-        href="/projects"
-        class="font-sans text-sm"
-        style={`text-decoration: none; color: ${isActive('/projects') ? 'var(--accent)' : 'var(--muted)'};`}
-      >
-        Projects
+<header class="col site-header">
+  <a href="/" class="site-name">{copy.siteName}</a>
+  <nav class="site-nav">
+    {links.map((link) => (
+      <a href={link.href} aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}>
+        {link.label}
       </a>
-      <a
-        href="/writing/essays"
-        class="font-sans text-sm"
-        style={`text-decoration: none; color: ${isActive('/writing/essays') ? 'var(--accent)' : 'var(--muted)'};`}
-      >
-        Essays
-      </a>
-      <a
-        href="/writing/notes"
-        class="font-sans text-sm"
-        style={`text-decoration: none; color: ${isActive('/writing/notes') ? 'var(--accent)' : 'var(--muted)'};`}
-      >
-        Notes
-      </a>
-      <button
-        id="theme-toggle"
-        class="font-sans text-xs"
-        style="color: var(--muted); background: none; border: none; cursor: pointer; padding: 0;"
-        aria-label="Toggle dark mode"
-      >
-        <span id="theme-label">auto</span>
-      </button>
-    </div>
+    ))}
+    <a href="https://github.com/zachmacsmith" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+      <span id="theme-label">auto</span>
+    </button>
   </nav>
 </header>
 

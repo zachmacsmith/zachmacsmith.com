@@ -18,10 +18,10 @@ siteName: Zach Macaskill-Smith
 metaDescription: Personal website of Zach Macaskill-Smith — projects, essays, and notes.
 
 home:
+  # The intro paragraphs live in src/data/home-intro.md
   tabTitle: Zach Macaskill-Smith
-  intro: I work on quantum computing and AI and some other stuff. I made this website.
-  featuredHeading: Selected
-  recentHeading: Recent
+  projectsHeading: Projects
+  writingHeading: Writing
 
 projects:
   tabTitle: Projects
@@ -29,9 +29,9 @@ projects:
   subtitle: "I built some stuff:"
 
 essays:
-  tabTitle: Essays
-  heading: Essays
-  subtitle: Finished pieces of writing, technical or not.
+  tabTitle: Writing
+  heading: Writing
+  subtitle: I put some words in an order.  
 
 notes:
   tabTitle: Notes

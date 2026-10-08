@@ -1,0 +1,80 @@
+---
+import type { Project } from '../data/projects';
+
+type Props = Project & {
+  /** compact: small photo + one line (home page). full: photo + breakdown (projects page). */
+  variant?: 'compact' | 'full';
+};
+
+const {
+  variant = 'compact',
+  title, description, status, year, summary, recognition,
+  image, imageAlt, imageCaption, imageFocus,
+  github, pypi, paper, demo, blog, link,
+} = Astro.props;
+
+const href = link ?? blog;
+const isExternal = (url: string) => url.startsWith('http');
+const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+const links = [
+  { label: 'essay', href: blog },
+  { label: 'paper', href: paper },
+  { label: 'code', href: github },
+  { label: 'pypi', href: pypi },
+  { label: 'demo', href: demo },
+].filter((l): l is { label: string; href: string } => Boolean(l.href));
+
+const figureStyle = imageFocus ? `object-position: ${imageFocus}` : undefined;
+const figureAlt = imageAlt ?? title;
+const meta = [year, status].filter(Boolean).join(' · ');
+---
+
+{variant === 'compact' ? (
+  <div class="project">
+    {image
+      ? <img class="project-fig" src={image} alt={figureAlt} style={figureStyle} loading="lazy" />
+      : <div class="project-fig project-fig-empty" aria-hidden="true"></div>}
+    <div class="project-body">
+      <div class="project-head">
+        <span>
+          {href
+            ? <a class="project-title" href={href} target={isExternal(href) ? '_blank' : undefined} rel={isExternal(href) ? 'noopener noreferrer' : undefined}>{title}</a>
+            : <span class="project-title">{title}</span>}
+          <span class="muted"> ({status})</span>
+        </span>
+        {links.length > 0 && (
+          <span class="project-links">
+            {links.map((l) => <a href={l.href} target={isExternal(l.href) ? '_blank' : undefined} rel={isExternal(l.href) ? 'noopener noreferrer' : undefined}>[{l.label}]</a>)}
+          </span>
+        )}
+      </div>
+      {description && <p class="project-desc">{description}</p>}
+    </div>
+  </div>
+) : (
+  <article class="project-full" id={slug}>
+    {image && (
+      <figure>
+        <img src={image} alt={figureAlt} style={figureStyle} loading="lazy" />
+        {imageCaption && <figcaption>{imageCaption}</figcaption>}
+      </figure>
+    )}
+    <div class="project-full-head">
+      <h2>{href ? <a href={href} target={isExternal(href) ? '_blank' : undefined} rel={isExternal(href) ? 'noopener noreferrer' : undefined}>{title}</a> : title}</h2>
+      {meta && <span class="muted">{meta}</span>}
+    </div>
+    {description && <p class="project-desc">{description}</p>}
+    {recognition && recognition.length > 0 && (
+      <ul class="recognition">
+        {recognition.map((r) => <li>{r}</li>)}
+      </ul>
+    )}
+    {summary?.map((p) => <p>{p}</p>)}
+    {links.length > 0 && (
+      <div class="project-links">
+        {links.map((l) => <a href={l.href} target={isExternal(l.href) ? '_blank' : undefined} rel={isExternal(l.href) ? 'noopener noreferrer' : undefined}>[{l.label}]</a>)}
+      </div>
+    )}
+  </article>
+)}
