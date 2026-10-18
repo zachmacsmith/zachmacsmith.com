@@ -42,6 +42,8 @@ npm run sync:preview-stop   # stop it
 npm run sync:publish        # publish now, without the confirmation dialog
 ```
 
+To set up on a new Mac: `./scripts/install-preview-link.sh`, then `./scripts/install-schedule.sh`.
+
 The links in `PUBLIC_WEBSITE/_Site preview.md` do the same: Start, Stop and Publish now
 (which asks you to confirm first). The preview stops by itself after 60 minutes without visits
 or edits.
@@ -54,7 +56,7 @@ Nothing here lives in the vault or this repo except the notes and scripts listed
 | --- | --- | --- |
 | `~/Applications/Website Preview.app` | Handles `zsite://` links from Obsidian. Runs only when a link is clicked. | `scripts/install-preview-link.sh` |
 | `~/.website-sync/` | Working folder: the preview copy of the site (`preview/`), the publishing copy (`zachmacsmith.com/`) and logs. | The sync script |
-| `~/Library/LaunchAgents/com.zachmacsmith.website-sync.plist` | The every-3-days automatic sync (not installed yet). | — |
+| `~/Library/LaunchAgents/com.zachmacsmith.website-sync.plist` | The automatic sync: checks daily at 7pm and at login, publishes if the last sync was 3+ days ago and something changed. Logs to `~/.website-sync/schedule.log` and `sync.log`. | `scripts/install-schedule.sh` |
 | Documents folder access for "Website Preview" | macOS permission, granted the first time a link is clicked. | macOS |
 
 In the vault, the sync also writes `PUBLIC_WEBSITE/_Site status.md`, `_Site preview.md`,
