@@ -24,6 +24,9 @@ function estimateReadTime(body: string): number {
   date={essay.data.date}
   description={essay.data.description}
   tags={essay.data.tags}
+  updated={essay.data.updated}
+  status={essay.data.status}
+  preview={essay.data.preview}
   readTime={estimateReadTime(essay.body)}
 >
   <Content />

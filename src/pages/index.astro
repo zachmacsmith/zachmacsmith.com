@@ -8,19 +8,14 @@ import { copy, pageTitle } from '../data/copy';
 import { Content as Intro } from '../data/home-intro.md';
 
 const essays = await getCollection('essays');
-const notes = await getCollection('notes');
 
+// Notes stay off the home page; they have their own section.
 const writing = [
   ...essays.map((e) => ({
     title: e.data.title,
     href: `/writing/essays/${e.slug}`,
     date: e.data.date,
     description: e.data.description,
-  })),
-  ...notes.map((n) => ({
-    title: n.data.title,
-    href: `/writing/notes/${n.slug}`,
-    date: n.data.date,
   })),
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
 

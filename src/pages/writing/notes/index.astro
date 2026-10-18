@@ -10,7 +10,7 @@ const items = notes
     title: n.data.title,
     href: `/writing/notes/${n.slug}`,
     date: n.data.date,
-    description: n.data.tags.length > 0 ? n.data.tags.join(', ') : undefined,
+    description: n.data.description,
   }))
   .sort((a, b) => b.date.getTime() - a.date.getTime());
 ---
@@ -18,7 +18,7 @@ const items = notes
 <Base title={pageTitle(copy.notes)}>
   <div class="col">
     <h1 class="page-title">{copy.notes.heading}</h1>
-    <p class="page-subtitle">{copy.notes.subtitle}</p>
+    <p class="page-subtitle" set:html={copy.notes.subtitle} />
     <DatedList items={items} />
   </div>
 </Base>

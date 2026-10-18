@@ -1,0 +1,62 @@
+{
+  "projects/charter": {
+    "title": "Charter",
+    "url": "/projects#charter",
+    "hash": "33cde7604821dea739387806b15333bad434cb9cc2f0b3ee2460ac66a1843b4b"
+  },
+  "projects/qkd-cubesat": {
+    "title": "QKD Cubesat",
+    "url": "/projects#qkd-cubesat",
+    "hash": "bedaf4bed457f1bdbb0c6a1e155213dc107af9bee7edab7a7139eacd3ea2c498"
+  },
+  "projects/wisp": {
+    "title": "WISP",
+    "url": "/projects#wisp",
+    "hash": "a897abe0765b46491d5f3d59e547781cd54fd435a81e020c9487b9698528e3b4"
+  },
+  "projects/ember": {
+    "title": "EMBER",
+    "url": "/projects#ember",
+    "hash": "821f6b8289e19a2bbfeb98de9bc133f85db0956862bdc6197fc225796ccab3f3"
+  },
+  "projects/spatial-ai": {
+    "title": "Spatial AI",
+    "url": "/projects#spatial-ai",
+    "hash": "86a368b1ad230dabbb74e00899d4f18083ad154ecc9e332bb8893cf872f4370c"
+  },
+  "projects/quantathon": {
+    "title": "Quantathon",
+    "url": "/projects#quantathon",
+    "hash": "4e791e5924ea1a7e3db96f04a15305477f5655f8952e7ecfcdc378cfd720b91a"
+  },
+  "site/Site": {
+    "title": "Site",
+    "url": "/",
+    "hash": "b6a7b1730081ffc80509f13a6d96ced94440344c314fedf5b893f500301e5218"
+  },
+  "site/Home": {
+    "title": "Home",
+    "url": "/",
+    "hash": "478cfce34ccfebfd5455c9aa003a47aec55d7e7f50cf335e271229e5a32e04d0"
+  },
+  "site/Projects": {
+    "title": "Projects",
+    "url": "/projects",
+    "hash": "b14822a47bc280f4213d52eefc27a9b58f43f12397d8eaf12cc9b2db7a50c81f"
+  },
+  "site/Writing": {
+    "title": "Writing",
+    "url": "/writing/essays",
+    "hash": "d93ae967111d8f29b336af6d4865737f5d724dfbce4f52b2727f278897cde6ee"
+  },
+  "site/Notes": {
+    "title": "Notes",
+    "url": "/writing/notes",
+    "hash": "7d0cfcfe9613acf791c8e8af0afa97eb45bfda968619055bc9c984e92dbb3daf"
+  },
+  "site/Page not found": {
+    "title": "Page not found",
+    "url": "/404",
+    "hash": "5c0f125def5c268a09325a8857ebfdb51a94da5b21f5941d9f3d05577b55efd3"
+  }
+}

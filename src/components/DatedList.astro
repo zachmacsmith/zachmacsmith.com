@@ -13,7 +13,7 @@ interface Props {
 const { items } = Astro.props;
 
 function formatDate(date: Date) {
-  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  return date.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', year: 'numeric' });
 }
 ---
 

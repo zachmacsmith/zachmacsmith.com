@@ -2,10 +2,10 @@
 title: "How do we decide what is right?"
 date: 2026-05-12
 description: "A dialogue on natural selection"
-tags: [philosophy, speculative, don't take this too seriously]
-featured: false
+tags: ["philosophy","speculative","don't take this too seriously"]
 ---
 
+<!-- Generated from Obsidian (WRITING_WEBSITE/How do we decide what is right.md). Edit it there, not here. -->
 
 And, if everything is relative, if we're all just figuring it out on our own, what then?
 

@@ -8,17 +8,22 @@ interface Props {
   description?: string;
   tags?: string[];
   readTime?: number;
+  updated?: Date;
+  status?: string;
+  preview?: boolean;
 }
 
-const { title, date, description, tags = [], readTime } = Astro.props;
+const { title, date, description, tags = [], readTime, updated, status, preview } = Astro.props;
 
 const formattedDate = date.toLocaleDateString('en-US', {
+  timeZone: 'UTC',
   month: 'long',
   year: 'numeric',
 });
 
 const meta = [
   formattedDate,
+  ...(updated ? [`updated ${updated.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', year: 'numeric' })}`] : []),
   ...(readTime ? [`${readTime} min read`] : []),
   ...(tags.length > 0 ? [tags.join(', ')] : []),
 ].join(' · ');
@@ -26,10 +31,14 @@ const meta = [
 
 <Base title={`${title} — ${copy.siteName}`} description={description}>
   <article class="col">
+    {preview && (
+      <p class="preview-banner">Preview: this isn't on the live site. It's marked <code>publish: preview</code> in Obsidian.</p>
+    )}
     <header class="article-header">
       <h1>{title}</h1>
       {description && <p class="subtitle">{description}</p>}
       <p class="meta">{meta}</p>
+      {status && <p class="status">{status}</p>}
     </header>
     <div class="prose-custom" id="essay-body">
       <slot />

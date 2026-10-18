@@ -2,15 +2,14 @@
 title: "EMBER: A Benchmarking Framework for Minor Graph Embedding"
 date: 2026-04-20
 description: "Why measuring embedding quality matters for quantum optimization, and what EMBER does about it."
-tags: [quantum, D-Wave, Python]
-featured: true
+tags: ["quantum","D-Wave","Python"]
 ---
+
+<!-- Generated from Obsidian (WRITING_WEBSITE/EMBER - A Benchmarking Framework for Minor Graph Embedding.md). Edit it there, not here. -->
 
 While researching better minor embedding algorithms[^1] for quantum annealers, I found out there was no benchmark for comparing performance. All algorithms claimed their own superiority on a specific subset of graph types, under specific, potentially non-reproducible conditions. 
 
-
 [^1]: This is the algorithm used to map the logical graph representing a relevant problem to the hardware graph it runs on. Since they don't match, we must map each logical vertex to *chains* of connected hardware vertices. Minor embedding is about doing this well and fast. D-wave describes it [here](https://docs.dwavequantum.com/en/latest/quantum_research/embedding_intro.html) and the industry standard is [minorminer](https://docs.dwavequantum.com/en/latest/ocean/api_ref_minorminer/source/index.html).
-
 
 It is clear why a common benchmarking framework is important--we need a shared ground truth to actually compare improvements for science to work effectively. So I built [one](https://arxiv.org/abs/2604.25433).
 
@@ -31,7 +30,7 @@ The main results were that Minorminer is the best algorithm out of those we test
 
 But, outside of these regimes, Minorminer on average still leads by far:[^4]  
 
-![Success_rate_Graph](/images/projects/success_rate_vs_nodes_linear_bin20.png)
+![Success_rate_Graph](/images/essays/success-rate-vs-nodes-linear-bin20.png)
 
 However, I built ember to be very easily extensible. You can quickly build, plug in and test your own custom algorithms. I'm planning on also building an open community leaderboard at some point.
 

@@ -1,7 +1,4 @@
-<!--
-  The intro paragraphs at the top of the home page. Plain markdown: edit and rebuild.
-  (This comment doesn't show on the site.)
--->
+<!-- Generated from Obsidian (PUBLIC_WEBSITE/SITE_TEXT/Home.md). Edit it there, not here. -->
 
 I'm Zach, a New Zealander studying math + CS at Vanderbilt University. I spent my first year here mostly working in quantum: I [competed](https://lnkd.in/p/eqJbAkgn) [at](https://lnkd.in/p/e4FKPWdM) and [won](https://vanderbilthustler.com/2025/10/27/vanderbilt-quantum-initiative-wins-south-carolinas-annual-quantum-hackathon/) various hackathons, I'm leading a team building a CubeSat to do [quantum key distribution](/writing/essays/why-we-need-qkd), and I recently presented [my first paper](https://arxiv.org/abs/2604.25433) at [IEEE Quantum Week](https://www.icons.vanderbilt.edu/news/vanderbilt-undergraduates-present-quantum-computing-research-ieee-quantum-week) (on [benchmarking](/writing/essays/ember-benchmarking) a classical preprocessing phase necessary to embed on some types of quantum computers).
 

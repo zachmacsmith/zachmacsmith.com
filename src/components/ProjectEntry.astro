@@ -10,7 +10,7 @@ const {
   variant = 'compact',
   title, description, status, year, summary, recognition,
   image, imageAlt, imageCaption, imageFocus, video,
-  github, pypi, paper, demo, blog, link,
+  github, pypi, paper, demo, blog, link, preview,
 } = Astro.props;
 
 const href = link ?? blog;
@@ -44,6 +44,7 @@ const meta = [year, status].filter(Boolean).join(' · ');
             ? <a class="project-title" href={href} target={isExternal(href) ? '_blank' : undefined} rel={isExternal(href) ? 'noopener noreferrer' : undefined}>{title}</a>
             : <span class="project-title">{title}</span>}
           <span class="muted"> ({status})</span>
+          {preview && <span class="preview-tag">preview</span>}
         </span>
         {links.length > 0 && (
           <span class="project-links">
@@ -51,7 +52,7 @@ const meta = [year, status].filter(Boolean).join(' · ');
           </span>
         )}
       </div>
-      {description && <p class="project-desc">{description}</p>}
+      {description && <p class="project-desc" set:html={description} />}
     </div>
   </div>
 ) : (
@@ -61,20 +62,21 @@ const meta = [year, status].filter(Boolean).join(' · ');
         {video
           ? <video src={video} poster={image} aria-label={figureAlt} style={figureStyle} autoplay loop muted playsinline preload="metadata"></video>
           : <img src={image} alt={figureAlt} style={figureStyle} loading="lazy" />}
-        {imageCaption && <figcaption>{imageCaption}</figcaption>}
+        {imageCaption && <figcaption set:html={imageCaption} />}
       </figure>
     )}
     <div class="project-full-head">
       <h2>{href ? <a href={href} target={isExternal(href) ? '_blank' : undefined} rel={isExternal(href) ? 'noopener noreferrer' : undefined}>{title}</a> : title}</h2>
       {meta && <span class="muted">{meta}</span>}
+      {preview && <span class="preview-tag">preview, not live</span>}
     </div>
-    {description && <p class="project-desc">{description}</p>}
+    {description && <p class="project-desc" set:html={description} />}
     {recognition && recognition.length > 0 && (
       <ul class="recognition">
-        {recognition.map((r) => <li>{r}</li>)}
+        {recognition.map((r) => <li set:html={r} />)}
       </ul>
     )}
-    {summary?.map((p) => <p>{p}</p>)}
+    {summary?.map((p) => <p set:html={p} />)}
     {links.length > 0 && (
       <div class="project-links">
         {links.map((l) => <a href={l.href} target={isExternal(l.href) ? '_blank' : undefined} rel={isExternal(l.href) ? 'noopener noreferrer' : undefined}>[{l.label}]</a>)}

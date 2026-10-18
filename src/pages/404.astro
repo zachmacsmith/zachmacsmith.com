@@ -7,7 +7,7 @@ import { copy, pageTitle } from '../data/copy';
   <div class="col">
     <p class="muted">{copy.notFound.eyebrow}</p>
     <h1 class="page-title">{copy.notFound.heading}</h1>
-    <p class="page-subtitle">{copy.notFound.subtitle}</p>
+    <p class="page-subtitle" set:html={copy.notFound.subtitle} />
     <a href="/">{copy.notFound.backLink}</a>
   </div>
 </Base>

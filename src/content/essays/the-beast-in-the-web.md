@@ -2,9 +2,10 @@
 title: "The Beast In The Web"
 date: 2026-08-10
 description: "Reviewing Anil Seth's Being You: A New Science of Consciousness"
-tags: [consciousness, AI, book review]
-featured: false
+tags: ["consciousness","AI","book review"]
 ---
+
+<!-- Generated from Obsidian (WRITING_WEBSITE/The Beast In The Web.md). Edit it there, not here. -->
 
 # I. WHAT
 

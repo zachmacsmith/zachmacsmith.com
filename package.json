@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "sync:preview": "node scripts/sync-obsidian.mjs preview-start",
+    "sync:preview-stop": "node scripts/sync-obsidian.mjs preview-stop",
+    "sync:publish": "node scripts/sync-obsidian.mjs publish"
   },
   "dependencies": {
     "astro": "^4.16.0",

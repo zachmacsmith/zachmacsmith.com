@@ -267,6 +267,24 @@
   .article-header h1 { font-size: 2rem; font-weight: 600; line-height: 1.2; text-wrap: balance; }
   .article-header .subtitle { color: var(--muted); font-size: 1.1rem; }
   .article-header .meta { color: var(--muted); font-size: 0.9rem; }
+  /* Shown only in the local preview, on pages marked `publish: preview`. */
+  .preview-banner {
+    margin-bottom: 24px;
+    padding: 8px 12px;
+    border: 1px dashed var(--muted);
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .preview-tag {
+    margin-left: 8px;
+    padding: 0 6px;
+    border: 1px dashed var(--muted);
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .article-header .status { color: var(--muted); font-size: 0.9rem; font-style: italic; }
 }
 
 /* ─── Prose ─────────────────────────────────────────────────────────────── */

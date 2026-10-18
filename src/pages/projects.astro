@@ -8,7 +8,7 @@ import { copy, pageTitle } from '../data/copy';
 <Base title={pageTitle(copy.projects)}>
   <div class="col">
     <h1 class="page-title">{copy.projects.heading}</h1>
-    <p class="page-subtitle">{copy.projects.subtitle}</p>
+    <p class="page-subtitle" set:html={copy.projects.subtitle} />
 
     {projects.map((project) => <ProjectEntry {...project} variant="full" />)}
   </div>

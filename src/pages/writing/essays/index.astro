@@ -18,7 +18,7 @@ const items = essays
 <Base title={pageTitle(copy.essays)}>
   <div class="col">
     <h1 class="page-title">{copy.essays.heading}</h1>
-    <p class="page-subtitle">{copy.essays.subtitle}</p>
+    <p class="page-subtitle" set:html={copy.essays.subtitle} />
     <DatedList items={items} />
   </div>
 </Base>
