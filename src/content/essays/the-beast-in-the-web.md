@@ -1,12 +1,13 @@
 ---
-title: "The Beast In The Web"
+title: "The Beast In The Machine"
 date: 2026-08-10
 description: "Reviewing Anil Seth's Being You: A New Science of Consciousness"
 tags: ["consciousness","AI","book review"]
 ---
 
-<!-- Generated from Obsidian (WRITING_WEBSITE/The Beast In The Web.md). Edit it there, not here. -->
+<!-- Generated from Obsidian (WRITING_WEBSITE/The Beast In The Machine.md). Edit it there, not here. -->
 
+*NOTE: This essay was [a submission](https://acxreviews.robennals.org/reviews/being-you-a-new-science-of-consciousness-by-anil-seth?year=2026&q=being+y) to the 2026 ACX book review contest. I have posted it here unedited.* 
 # I. WHAT
 
 Somewhere, on a far off hill in Arkansas, John stumbled across an infinite-dimensional object. Not a 4d hypersphere, but one with *uncountably infinite sides*.
