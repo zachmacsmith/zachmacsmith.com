@@ -26,6 +26,8 @@ export interface Project {
   /** Write-up on this site, if there is one. */
   blog?: string;
   link?: string;
+  /** Any other link properties on the Obsidian note, e.g. `website: https://…` becomes [website]. */
+  extraLinks?: { label: string; href: string }[];
   /** Only set in the local preview, for projects marked `publish: preview`. */
   preview?: boolean;
 }

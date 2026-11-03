@@ -30,7 +30,9 @@ Other properties (all optional):
   `updated`, `description`, `tags`, `status`, `slug`.
 - Projects: `order`, `description`, `status`, `year`, `image`, `video`, `image_alt`, `caption`,
   `image_focus`, `starred`, `recognition`, `tags`, `github`, `pypi`, `paper`, `demo`, `essay`, `link`.
-  The note body is the project's description on /projects.
+  The note body is the project's description on /projects. Any other property whose value is a link
+  (`https://…`, a site path, or `[[Note]]`) is shown as an extra link named after the property,
+  e.g. `website: https://…` becomes [website].
 - `SITE_TEXT`: `heading` (required on Projects, Writing, Notes and Page not found), `tab_title`;
   `Site.md` has `name` and `description`; `Home.md` has `projects_heading` and `writing_heading`.
 

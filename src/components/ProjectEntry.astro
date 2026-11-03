@@ -10,7 +10,7 @@ const {
   variant = 'compact',
   title, description, status, year, summary, recognition,
   image, imageAlt, imageCaption, imageFocus, video,
-  github, pypi, paper, demo, blog, link, preview,
+  github, pypi, paper, demo, blog, link, extraLinks = [], preview,
 } = Astro.props;
 
 const href = link ?? blog;
@@ -23,6 +23,7 @@ const links = [
   { label: 'code', href: github },
   { label: 'pypi', href: pypi },
   { label: 'demo', href: demo },
+  ...extraLinks,
 ].filter((l): l is { label: string; href: string } => Boolean(l.href));
 
 const figureStyle = imageFocus ? `object-position: ${imageFocus}` : undefined;

@@ -405,6 +405,22 @@ function linkProperty(value, rel, ctx) {
   return `${linked.section.urlBase}${linked.slug}`;
 }
 
+/** Project properties with their own meaning. Any other property holding a link becomes an extra [label] link. */
+const PROJECT_PROPERTIES = new Set(['publish', 'order', 'title', 'slug', 'description', 'status', 'year', 'recognition', 'image', 'video',
+  'image_alt', 'caption', 'image_focus', 'starred', 'tags', 'github', 'pypi', 'paper', 'demo', 'essay', 'link', 'aliases', 'cssclasses']);
+
+function extraLinks(data, rel, ctx) {
+  const out = [];
+  for (const [key, value] of Object.entries(data)) {
+    if (PROJECT_PROPERTIES.has(key) || typeof value !== 'string') continue;
+    const v = value.trim();
+    if (!/^(https?:\/\/|\/|\[\[)/.test(v)) continue;
+    const href = linkProperty(v, rel, ctx);
+    if (href) out.push({ label: key.replace(/[_-]+/g, ' '), href });
+  }
+  return out;
+}
+
 function readProjects(state, ctx, files, skipped, target) {
   const dir = path.join(PUBLIC_DIR, PROJECTS.folder);
   const projects = [];
@@ -448,6 +464,8 @@ function readProjects(state, ctx, files, skipped, target) {
       demo: linkProperty(data.demo, rel, ctx),
       blog: linkProperty(data.essay, rel, ctx),
       link: linkProperty(data.link, rel, ctx),
+      // Only present when there are some, so existing projects don't change.
+      ...(() => { const extra = extraLinks(data, rel, ctx); return extra.length ? { extraLinks: extra } : {}; })(),
       order: data.order != null && !Number.isNaN(Number(data.order)) ? Number(data.order) : undefined,
       rel,
       held: publish === 'preview',
