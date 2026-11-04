@@ -1,23 +1,31 @@
 [
   {
-    "title": "Charter",
+    "title": "Cybertron",
     "slug": "charter",
     "description": "Small worlds for societies of LLM agents, who trade, scheme and govern themselves through laws written as code.",
     "status": "active",
     "year": "2026",
     "summary": [
-      "Charter builds small worlds for societies of Claude agents and lets them run. Agents of mixed capability harvest resources, trade, message each other in public and in private, and govern themselves through laws written as executable code: money, taxes, courts and property exist only if the agents legislate them. Every agent has private goals, and every word, vote and private thought is kept, which makes it a testbed for watching AI swarms the way a social scientist would watch a town: who gains power, who deceives, which institutions emerge, and whether anyone can tell from the outside."
+      "Cybertron builds small worlds for societies of Claude agents and lets them run. Agents of mixed capability harvest resources, trade, message each other in public and in private, and govern themselves through laws written as executable code: money, taxes, courts and property exist only if the agents legislate them. Every agent has private goals, and every word, vote and private thought is kept, which makes it a testbed for watching AI swarms the way a social scientist would watch a town: who gains power, who deceives, which institutions emerge, and whether anyone can tell from the outside.",
+      "Cybertron 1 is complete. Its 183 runs are open on the <a href=\"https://cybertron.zachmacsmith.com\" target=\"_blank\" rel=\"noopener noreferrer\">Cybertron 1 website</a>, where each run is drawn as its own village and can be replayed day by day: the chronicle, the laws as they were written, the letters, and every agent's private diary. Cybertron 2, now in progress, puts the agents in space: the world becomes a map of places, and each agent acts and sees only where it stands."
     ],
     "recognition": [],
-    "image": "/images/projects/charter-header-16x9.svg",
-    "imageAlt": "Charter: societies of LLM agents, with quotes from agents in the runs",
+    "image": "/images/projects/cybertron-cover.png",
+    "imageAlt": "Cybertron 1: nine pixel-art villagers on a sandy hill below a walled town, under a starry night sky",
     "starred": false,
     "tags": [
       "Python",
       "LLM agents",
       "Multi-agent"
     ],
-    "github": "https://github.com/zachmacsmith/charter"
+    "github": "https://github.com/zachmacsmith/cybertron",
+    "link": "https://cybertron.zachmacsmith.com",
+    "extraLinks": [
+      {
+        "label": "website",
+        "href": "https://cybertron.zachmacsmith.com"
+      }
+    ]
   },
   {
     "title": "QKD Cubesat",
